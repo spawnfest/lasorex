@@ -1,5 +1,4 @@
 defmodule Lasorex.Format do
-
   def header, do: "name\tqueue\tmemory"
 
   defimpl String.Chars, for: Lasorex.Process do
