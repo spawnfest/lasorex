@@ -1,0 +1,3 @@
+%{
+  "tachometer": {:hex, :tachometer, "0.1.1", "8afaace9b6274a53bcf9e645d83b8b8ddf88ecca5034ff6845a92d6af5c78a18", [:mix], [], "hexpm"},
+}
