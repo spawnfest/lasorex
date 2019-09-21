@@ -5,11 +5,11 @@ defmodule Lasorex.List do
     Process.list() |> Enum.map(fn pid -> form_struct(Process.info(pid)) end)
   end
 
-  def form_struct(process_info) do
+  defp form_struct(process_info) do
     %Myprocess{
       name: process_info[:registered_name],
       queue: process_info[:message_queue_len],
-      memory: process_info[:heap_size]
+      memory: process_info[:total_heap_size]
     }
   end
 end
