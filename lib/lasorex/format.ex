@@ -15,12 +15,13 @@ defmodule Lasorex.Format do
   end
 
   defp header(usage), do: "Scheduler Usage: #{usage}%"
-  defp columns, do: Enum.join([name_column(), queue_column(), memory_column()], "")
-  defp hr, do: String.duplicate("-", 90)
+  defp columns, do: Enum.join([name_column(), queue_column(), memory_column(), pid_column()], "")
+  defp hr, do: String.duplicate("-", 150)
 
   defp name_column, do: String.pad_trailing("name", @column_width)
   defp queue_column, do: String.pad_trailing("queue", @column_width)
-  defp memory_column, do: "memory"
+  defp memory_column, do: String.pad_trailing("memmory", @column_width)
+  defp pid_column, do: "pid"
 
   defp processes_lines(processes) do
     processes

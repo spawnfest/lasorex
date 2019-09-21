@@ -7,7 +7,7 @@ defmodule Lasorex.Process do
       members = get_members_name(process.members)
 
       proc =
-        ["#{process.name}", "#{process.queue}", "#{process.memory}"]
+        ["#{process.name}", "#{process.queue}", "#{process.memory}", "#{inspect(process.pid)}"]
         |> parser
 
       proc <> "\n" <> members
@@ -16,7 +16,7 @@ defmodule Lasorex.Process do
     defp get_members_name(members) do
       members
       |> Enum.map(fn p ->
-        ["   |___ #{p.name}", "#{p.queue}", "#{p.memory}"]
+        ["   |___ #{p.name}", "#{p.queue}", "#{p.memory}", "#{inspect(p.pid)}"]
         |> parser
       end)
       |> Enum.join("\n")
