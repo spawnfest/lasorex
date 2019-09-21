@@ -2,7 +2,7 @@ defmodule Lasorex.List do
   alias Lasorex.Process, as: Myprocess
 
   def list do
-    Process.list() |> Enum.map(fn pid -> form_struct(Process.info(pid)) end)
+    Process.list() |> Enum.map(fn pid -> form_struct(Process.info(pid), pid) end)
   end
 
   def list(:filter, name) do
@@ -34,11 +34,13 @@ defmodule Lasorex.List do
     |> Enum.sort(fn x, y -> if Map.get(x, key) > Map.get(y, key), do: true, else: false end)
   end
 
-  defp form_struct(process_info) do
+  defp form_struct(process_info, pid) do
     %Myprocess{
       name: to_string(process_info[:registered_name]),
       queue: process_info[:message_queue_len],
-      memory: process_info[:total_heap_size]
+      memory: process_info[:total_heap_size],
+      group_leader: process_info[:group_leader],
+      pid: pid
     }
   end
 end

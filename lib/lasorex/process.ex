@@ -1,5 +1,5 @@
 defmodule Lasorex.Process do
-  defstruct [:name, :queue, :memory]
+  defstruct [:name, :queue, :memory, :pid, :group_leader, members: []]
 
   """
   %Process{name: "alan", queue: 2, memory: 3, members: [%Process{name: veer}]}
