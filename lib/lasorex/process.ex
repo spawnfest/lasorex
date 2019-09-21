@@ -1,16 +1,29 @@
 defmodule Lasorex.Process do
   defstruct [:name, :queue, :memory, :pid, :group_leader, members: []]
 
-  """
-  %Process{name: "alan", queue: 2, memory: 3, members: [%Process{name: veer}]}
-  alan          2        3
-    |____ veer  3        6
-  """
   defimpl String.Chars, for: __MODULE__ do
     @column_width 40
     def to_string(process) do
-      [process.name, process.queue, process.memory]
-      |> Enum.map(&"#{&1}")
+      members = get_members_name(process.members)
+
+      proc =
+        ["#{process.name}", "#{process.queue}", "#{process.memory}"]
+        |> parser
+
+      proc <> "\n" <> members
+    end
+
+    defp get_members_name(members) do
+      members
+      |> Enum.map(fn p ->
+        ["   |___ #{p.name}", "#{p.queue}", "#{p.memory}"]
+        |> parser
+      end)
+      |> Enum.join("\n")
+    end
+
+    defp parser(list) do
+      list
       |> Enum.map(&String.pad_trailing(&1, @column_width))
       |> Enum.join("")
     end
