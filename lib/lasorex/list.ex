@@ -7,12 +7,14 @@ defmodule Lasorex.List do
 
   def list(name) do
     list()
-    |> Enum.filter(fn process -> process.name == name end)
+    |> Enum.filter(fn process ->
+      String.contains?(String.downcase(process.name), String.downcase(name))
+    end)
   end
 
   defp form_struct(process_info) do
     %Myprocess{
-      name: process_info[:registered_name],
+      name: to_string(process_info[:registered_name]),
       queue: process_info[:message_queue_len],
       memory: process_info[:total_heap_size]
     }
