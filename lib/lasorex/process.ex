@@ -1,5 +1,4 @@
 defmodule Lasorex.Process do
-
   defstruct [:name, :queue, :memory]
 
   defimpl String.Chars, for: __MODULE__ do
