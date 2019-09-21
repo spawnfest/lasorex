@@ -5,8 +5,8 @@ defmodule Lasorex.Process do
   defimpl String.Chars, for: __MODULE__ do
     def to_string(process) do
       [process.name, process.queue, process.memory]
-      |> Enum.map(&("#{&1}"))
-      |> Enum.map(&(String.pad_trailing(&1, 50)))
+      |> Enum.map(&"#{&1}")
+      |> Enum.map(&String.pad_trailing(&1, 50))
       |> Enum.join("")
     end
   end

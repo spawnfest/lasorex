@@ -5,6 +5,6 @@ defmodule Lasorex do
   alias Lasorex.{Scheduler, List, Format}
 
   def btop do
-    Format.puts(List.list, Scheduler.read)
+    Format.puts(List.list(), Scheduler.read())
   end
 end
