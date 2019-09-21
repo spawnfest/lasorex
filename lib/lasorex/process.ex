@@ -2,7 +2,7 @@ defmodule Lasorex.Process do
   defstruct [:name, :queue, :memory]
 
   defimpl String.Chars, for: __MODULE__ do
-    @column_width 50
+    @column_width 40
     def to_string(process) do
       [process.name, process.queue, process.memory]
       |> Enum.map(&"#{&1}")
