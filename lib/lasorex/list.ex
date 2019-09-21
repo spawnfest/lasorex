@@ -7,9 +7,15 @@ defmodule Lasorex.List do
 
   def list(:filter, name) do
     list()
-    |> Enum.filter(fn process ->
-      String.contains?(String.downcase(process.name), String.downcase(name))
+    |> Enum.sort(fn p1, p2 ->
+      if String.bag_distance(String.downcase(name), String.downcase(p1.name)) >
+           String.bag_distance(String.downcase(name), String.downcase(p2.name)) do
+        true
+      else
+        false
+      end
     end)
+    |> Enum.take(5)
   end
 
   @doc """
