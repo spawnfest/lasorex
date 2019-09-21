@@ -5,6 +5,21 @@ defmodule Lasorex do
   alias Lasorex.{Scheduler, List, Format}
 
   def btop do
-    Format.puts(List.list(), Scheduler.read())
+    ExNcurses.n_begin()
+    ExNcurses.curs_set(0)
+    ExNcurses.clear()
+    ExNcurses.refresh()
+    ExNcurses.mvprintw(0, 0, Format.to_string(List.list(), Scheduler.read()))
+    ExNcurses.refresh()
+    ExNcurses.listen()
+    loop()
+  end
+
+  defp loop() do
+    receive do
+      {:ex_ncurses, :key, key} ->
+        ExNcurses.mvprintw(20, 0, "You just typed #{key}")
+        loop()
+    end
   end
 end

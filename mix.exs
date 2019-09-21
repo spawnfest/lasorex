@@ -21,7 +21,8 @@ defmodule Lasorex.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:tachometer, "~> 0.1.0"}
+      {:tachometer, "~> 0.1.0"},
+      {:ex_ncurses, "~> 0.3"}
     ]
   end
 end

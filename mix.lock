@@ -1,3 +1,5 @@
 %{
+  "elixir_make": {:hex, :elixir_make, "0.6.0", "38349f3e29aff4864352084fc736fa7fa0f2995a819a737554f7ebd28b85aaab", [:mix], [], "hexpm"},
+  "ex_ncurses": {:hex, :ex_ncurses, "0.3.1", "1c6c480815c3863fe45cecf54e86dcaa6fa4484847d05c77a090e1ecb384536b", [:make, :mix], [{:elixir_make, "~> 0.4", [hex: :elixir_make, repo: "hexpm", optional: false]}], "hexpm"},
   "tachometer": {:hex, :tachometer, "0.1.1", "8afaace9b6274a53bcf9e645d83b8b8ddf88ecca5034ff6845a92d6af5c78a18", [:mix], [], "hexpm"},
 }
