@@ -5,6 +5,11 @@ defmodule Lasorex.List do
     Process.list() |> Enum.map(fn pid -> form_struct(Process.info(pid)) end)
   end
 
+  def list(name) do
+    list()
+    |> Enum.filter(fn process -> process.name == name end)
+  end
+
   defp form_struct(process_info) do
     %Myprocess{
       name: process_info[:registered_name],
