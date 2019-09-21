@@ -2,17 +2,9 @@ defmodule Lasorex do
   @moduledoc """
   Documentation for Lasorex.
   """
+  alias Lasorex.{Scheduler, List, Format}
 
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> Lasorex.hello()
-      :world
-
-  """
-  def hello do
-    :world
+  def btop do
+    Format.puts(List.list, Scheduler.read)
   end
 end
