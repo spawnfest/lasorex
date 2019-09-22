@@ -5,8 +5,8 @@ defmodule Lasorex.List do
     Process.list() |> Enum.map(fn pid -> form_struct(Process.info(pid), pid) end)
   end
 
-  def list(process, :filter, name) do
-    process
+  def filter(processes, name) do
+    processes
     |> Enum.sort(fn p1, p2 ->
       if String.bag_distance(String.downcase(name), String.downcase(p1.name)) >
            String.bag_distance(String.downcase(name), String.downcase(p2.name)) do
@@ -18,19 +18,8 @@ defmodule Lasorex.List do
     |> Enum.take(5)
   end
 
-  @doc """
-  Sorting based on column
-  Expected parameters are order of sorting and column name, both atoms
-  Eg: (:sort_asc, :name) A-Z, 0-9
-  Eg: (:sort_desc, :name) Z-A, 9-0
-  """
-  def list(process, :sort_asc, key) do
-    process
-    |> Enum.sort(fn x, y -> if Map.get(x, key) < Map.get(y, key), do: true, else: false end)
-  end
-
-  def list(process, :sort_desc, key) do
-    process
+  def sort(processes, key) do
+    processes
     |> Enum.sort(fn x, y -> if Map.get(x, key) > Map.get(y, key), do: true, else: false end)
   end
 

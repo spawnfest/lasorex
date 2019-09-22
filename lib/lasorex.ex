@@ -41,7 +41,7 @@ defmodule Lasorex do
 
     lines = ExNcurses.lines()
 
-    frame = Format.to_string(processes, scheduler, lines)
+    frame = Format.to_string(processes, scheduler, state)
 
     ExNcurses.mvprintw(0, 0, frame)
     ExNcurses.refresh()
