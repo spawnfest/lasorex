@@ -1,8 +1,13 @@
 defmodule Lasorex.Tree do
   alias Lasorex.List
 
-  def puts do
-    process = List.list()
+  def puts, do: puts(:no_action, :no_comand)
+  def puts(action, comand) do
+    process =
+      case action do
+       :no_action -> List.list()
+        _ -> List.list(action, comand)
+      end
 
     process
     |> get_groups()
