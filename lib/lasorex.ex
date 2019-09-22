@@ -12,7 +12,7 @@ defmodule Lasorex do
     ExNcurses.curs_set(0)
     ExNcurses.noecho()
     ExNcurses.listen()
-    state = [field: :queue, input: ""]
+    state = [field: :name]
     refresh(state)
     loop(state)
   end
@@ -28,7 +28,7 @@ defmodule Lasorex do
         refresh(new_state)
         loop(new_state)
     after
-      500 ->
+      5000 ->
         refresh(state)
         loop(state)
     end

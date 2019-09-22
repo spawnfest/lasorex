@@ -2,17 +2,15 @@ defmodule Lasorex.State do
   @m 109
   @q 113
   @n 110
+  @b 98
 
-  def update(state, key) do
-    case key do
-      @m ->
-        state ++ [field: :memory]
+  def update([field: :memory], @n), do: [field: :name]
+  def update([field: :queue], @n), do: [field: :name]
 
-      @q ->
-        state ++ [field: :exit]
+  def update([field: :name], @m), do: [field: :memory]
+  def update([field: :queue], @m), do: [field: :memory]
 
-      @n ->
-        state ++ [field: :name]
-    end
-  end
+  def update([field: :name], @b), do: [field: :queue]
+  def update([field: :memory], @b), do: [field: :queue]
+  def update(state, _key), do: state
 end
