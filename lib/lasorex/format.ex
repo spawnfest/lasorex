@@ -1,15 +1,13 @@
 defmodule Lasorex.Format do
   @column_width 40
 
-  import IO.ANSI
-
-  @spec to_string(list(Lasorex.Process.t()), Float.t()) :: String.t()
-  def to_string(processes, usage) do
+  @spec to_string(list(Lasorex.Process.t()), Float.t(), number) :: String.t()
+  def to_string(processes, usage, lines) do
     [
       header(usage),
       columns(),
       hr(),
-      processes_lines(processes)
+      processes_lines(processes, lines)
     ]
     |> Enum.join("\n")
   end
@@ -23,9 +21,9 @@ defmodule Lasorex.Format do
   defp memory_column, do: String.pad_trailing("memory", @column_width)
   defp pid_column, do: "pid"
 
-  defp processes_lines(processes) do
+  defp processes_lines(processes, lines) do
     processes
-    |> Enum.take(10)
+    |> Enum.take(lines)
     |> Enum.map(&to_string/1)
     |> Enum.map(&String.pad_trailing(&1, @column_width))
     |> Enum.join("\n")
