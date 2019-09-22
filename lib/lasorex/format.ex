@@ -20,7 +20,7 @@ defmodule Lasorex.Format do
 
   defp name_column, do: String.pad_trailing("name", @column_width)
   defp queue_column, do: String.pad_trailing("queue", @column_width)
-  defp memory_column, do: String.pad_trailing("memmory", @column_width)
+  defp memory_column, do: String.pad_trailing("memory", @column_width)
   defp pid_column, do: "pid"
 
   defp processes_lines(processes) do
