@@ -23,7 +23,7 @@ be found at [https://hexdocs.pm/lasorex](https://hexdocs.pm/lasorex).
 
 ## Features
 
-Get a list of the processes that are running currently
+Get a list of the processes that are running currently. There are two ways of achieving this. One way is to use **Lasorex.List.list** function. This returns all the processes running currently at the top level.
 
 ```elixir
 iex(1)> Lasorex.List.list
@@ -63,6 +63,153 @@ iex(1)> Lasorex.List.list
   ...
 ]
 ```
+
+However, if you are also interested in the sub-processes as well, for each process (if it has any), then **Lasorex.Tree.puts** might be the one for you.
+
+```elixir
+iex(5)> Lasorex.Tree.puts()
+[
+  %Lasorex.Process{
+    group_leader: #PID<0.0.0>,
+    members: [
+      %Lasorex.Process{
+        group_leader: #PID<0.0.0>,
+        members: [],
+        memory: 3196,
+        name: "init",
+        pid: #PID<0.0.0>,
+        queue: 0
+      },
+      %Lasorex.Process{
+        group_leader: #PID<0.0.0>,
+        members: [],
+        memory: 3466,
+        name: "erts_code_purger",
+        pid: #PID<0.1.0>,
+        queue: 0
+      },
+      %Lasorex.Process{
+        group_leader: #PID<0.0.0>,
+        members: [],
+        memory: 233,
+        name: "",
+        pid: #PID<0.2.0>,
+        queue: 0
+      },
+      %Lasorex.Process{
+        group_leader: #PID<0.0.0>,
+        members: [],
+        memory: 233,
+        name: "",
+        pid: #PID<0.3.0>,
+        queue: 0
+      },
+      %Lasorex.Process{
+        group_leader: #PID<0.0.0>,
+        members: [],
+        memory: 233,
+        name: "",
+        pid: #PID<0.4.0>,
+        queue: 0
+      },
+      %Lasorex.Process{
+        group_leader: #PID<0.0.0>,
+        members: [],
+        memory: 233,
+        name: "",
+        pid: #PID<0.5.0>,
+        queue: 0
+      },
+      %Lasorex.Process{
+        group_leader: #PID<0.0.0>,
+        members: [],
+        memory: 233,
+        name: "",
+        pid: #PID<0.6.0>,
+        queue: 0
+      },
+      %Lasorex.Process{
+        group_leader: #PID<0.0.0>,
+        members: [],
+        memory: 20317,
+        name: "erl_prim_loader",
+        pid: #PID<0.9.0>,
+        queue: 0
+      },
+      %Lasorex.Process{
+        group_leader: #PID<0.0.0>,
+        members: [],
+        memory: 986,
+        name: "logger",
+        pid: #PID<0.41.0>,
+        queue: 0
+      }
+    ],
+    memory: 3196,
+    name: "init",
+    pid: #PID<0.0.0>,
+    queue: 0
+  },
+  %Lasorex.Process{
+    group_leader: #PID<0.0.0>,
+    members: [],
+    memory: 3466,
+    name: "erts_code_purger",
+    pid: #PID<0.1.0>,
+    queue: 0
+  },
+  %Lasorex.Process{
+    group_leader: #PID<0.0.0>,
+    members: [],
+    memory: 233,
+    name: "",
+    pid: #PID<0.2.0>,
+    queue: 0
+  },
+  %Lasorex.Process{
+    group_leader: #PID<0.0.0>,
+    members: [],
+    memory: 233,
+    name: "",
+    pid: #PID<0.3.0>,
+    queue: 0
+  },
+  %Lasorex.Process{
+    group_leader: #PID<0.0.0>,
+    members: [],
+    memory: 233,
+    name: "",
+    pid: #PID<0.4.0>,
+    queue: 0
+  },
+  %Lasorex.Process{
+    group_leader: #PID<0.0.0>,
+    members: [],
+    memory: 233,
+    name: "",
+    pid: #PID<0.5.0>,
+    queue: 0
+  },
+  %Lasorex.Process{
+    group_leader: #PID<0.0.0>,
+    members: [],
+    memory: 233,
+    name: "",
+    pid: #PID<0.6.0>,
+    queue: 0
+  },
+  %Lasorex.Process{
+    group_leader: #PID<0.0.0>,
+    members: [],
+    memory: 20317,
+    name: "erl_prim_loader",
+    pid: #PID<0.9.0>,
+    queue: 0
+  }
+]
+```
+
+---
 
 Filter the list of current processes based on a keyword
 
@@ -111,6 +258,8 @@ iex(2)> Lasorex.List.list(:filter, "Elixir")
   }
 ]
 ```
+
+---
 
 Sort the list based on the keys either ascending or descending order
 
@@ -230,6 +379,10 @@ iex(4)> Lasorex.List.list(:sort_asc, :memory)
   }
 ]
 ```
+
+**NOTE:** The **:sort_asc**, **:sort_desc**, and **:filter** operations can also be applied to the **Lasorex.Tree.puts** function, and this will retrieve the processes along with their member processes. If no members exist for that process, then the members will be an empty list.
+
+---
 
 Get a list of the scheduler usage, processes and their sub processes along with memory (in bytes), queue length, pid
 
