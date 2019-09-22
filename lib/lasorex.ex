@@ -27,7 +27,6 @@ defmodule Lasorex do
         new_state = State.update(state, key)
         refresh(new_state)
         loop(new_state)
-
     after
       500 ->
         refresh(state)

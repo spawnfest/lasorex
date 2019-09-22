@@ -4,22 +4,39 @@ defmodule Lasorex.Process do
   defimpl String.Chars, for: __MODULE__ do
     @column_width 40
     def to_string(process) do
-      members = get_members_name(process.members)
-
       proc =
-        ["#{process.name}", "#{process.queue}", "#{process.memory}", "#{inspect(process.pid)}"]
+        [
+          "#{format_pname(process.name)}",
+          "#{process.queue}",
+          "#{process.memory}",
+          "#{inspect(process.pid)}"
+        ]
         |> parser
 
-      proc <> "\n" <> members
+      case process.members do
+        [] ->
+          proc
+
+        _ ->
+          proc <> "\n" <> get_members(process.members)
+      end
     end
 
-    defp get_members_name(members) do
+    defp get_members(members) do
       members
       |> Enum.map(fn p ->
-        ["   |___ #{p.name}", "#{p.queue}", "#{p.memory}", "#{inspect(p.pid)}"]
+        ["   |___ #{format_pname(p.name)}", "#{p.queue}", "#{p.memory}", "#{inspect(p.pid)}"]
         |> parser
       end)
       |> Enum.join("\n")
+    end
+
+    def format_pname(val) do
+      if val == "" do
+        "<no_name>"
+      else
+        val
+      end
     end
 
     defp parser(list) do

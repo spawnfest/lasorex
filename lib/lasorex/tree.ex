@@ -2,13 +2,13 @@ defmodule Lasorex.Tree do
   alias Lasorex.List
 
   def puts, do: puts(:no_action, :no_comand)
+
   def puts(action, comand) do
     process =
       case action do
-       :no_action -> List.list()
-
-      #  TODO: change List.list() for the process in the current state
-        _ -> List.list() |>List.list(action, comand)
+        :no_action -> List.list()
+        #  TODO: change List.list() for the process in the current state
+        _ -> List.list() |> List.list(action, comand)
       end
 
     process
