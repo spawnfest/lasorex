@@ -2,33 +2,43 @@ defmodule Lasorex do
   @moduledoc """
   Documentation for Lasorex.
   """
-  alias Lasorex.{Scheduler, List, Format, Tree}
+  alias Lasorex.{Scheduler, State, Format, Tree}
+
+  @q 113
 
   def btop do
-    ExNcurses.n_begin()
+    ExNcurses.initscr()
     # Hides cursor
     ExNcurses.curs_set(0)
+    ExNcurses.noecho()
     ExNcurses.listen()
-    loop(field: :queue)
+    state = [field: :queue, input: ""]
+    refresh(state)
+    loop(state)
   end
 
   def loop(state) do
     receive do
+      {:ex_ncurses, :key, @q} ->
+        ExNcurses.n_end()
+        exit(:shutdown)
+
       {:ex_ncurses, :key, key} ->
+        new_state = State.update(state, key)
+        refresh(new_state)
+        loop(new_state)
 
-        ExNcurses.clear()
-        ExNcurses.mvprintw(0, 0, to_string(key))
-        ExNcurses.refresh()
-
-        loop(state)
     after
-      1000 ->
-        frame = Format.to_string(Tree.puts(), Scheduler.read(), ExNcurses.lines())
-
-        ExNcurses.mvprintw(0, 0, frame)
-        ExNcurses.refresh()
-
+      500 ->
+        refresh(state)
         loop(state)
     end
+  end
+
+  defp refresh(state) do
+    ExNcurses.clear()
+    frame = Format.to_string(Tree.puts(), Scheduler.read())
+    ExNcurses.mvprintw(0, 0, frame)
+    ExNcurses.refresh()
   end
 end
