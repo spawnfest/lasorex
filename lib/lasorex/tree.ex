@@ -6,7 +6,9 @@ defmodule Lasorex.Tree do
     process =
       case action do
        :no_action -> List.list()
-        _ -> List.list(action, comand)
+
+      #  TODO: change List.list() for the process in the current state
+        _ -> List.list() |>List.list(action, comand)
       end
 
     process
