@@ -6,20 +6,27 @@ An easy and quick way to monitor and keep track of the current running processes
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `lasorex` to your list of dependencies in `mix.exs`:
+The package can be installed by adding `lasorex` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
   [
-    {:lasorex, "~> 0.1.0"}
+    {:lasorex, "~> 0.1.0", [git: "https://github.com/spawnfest/lasorex.git"]}
   ]
 end
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/lasorex](https://hexdocs.pm/lasorex).
+And then get the dependency using
+
+```elixir
+mix deps.get
+```
+
+Then run the project using
+
+```elixir
+iex -S mix
+```
 
 ## Features
 
@@ -29,7 +36,7 @@ Get a list of the scheduler usage, processes and their sub processes along with 
 iex(1)>Lasorex.btop
 ```
 
-![Alt text](../master/images/1.png?raw=true "Process Scheduler stats")
+![Alt text](../master/priv/assets/1.png?raw=true "Process Scheduler stats")
 
 The resulting list of processes can be sorted based on the columns **name, queue, and memory** using the keys **n, b, m**
 
