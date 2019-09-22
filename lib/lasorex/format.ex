@@ -23,7 +23,7 @@ defmodule Lasorex.Format do
 
   defp processes_lines(processes, lines) do
     processes
-    |> Enum.take(10)
+    |> Enum.take(5)
     |> Enum.map(&to_string/1)
     |> Enum.map(&String.pad_trailing(&1, @column_width))
     |> Enum.join("\n")

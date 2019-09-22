@@ -37,7 +37,13 @@ defmodule Lasorex do
 
   defp refresh(state) do
     ExNcurses.clear()
-    frame = Format.to_string(Tree.puts(), Scheduler.read())
+    processes = Tree.puts()
+    scheduler = Scheduler.read()
+
+    lines = ExNcurses.lines()
+
+    frame = Format.to_string(processes, scheduler, lines)
+
     ExNcurses.mvprintw(0, 0, frame)
     ExNcurses.refresh()
   end
